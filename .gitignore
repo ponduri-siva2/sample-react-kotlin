@@ -1,0 +1,11 @@
+.gradle
+.idea
+build
+target
+out
+.DS_Store
+*.iml
+src/main/resources/secure.conf
+src/main/resources/version
+node_modules
+**/js

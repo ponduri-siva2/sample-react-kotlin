@@ -1,6 +1,6 @@
-##Xerini Interview Exercise
+## Xerini Interview Exercise
 
-###Build Instructions
+### Build Instructions
 
 This project provides a simple server-side component built in Kotlin and a front-end
 component built in React-JS/Typescript. 
@@ -23,7 +23,7 @@ To start the app, run the main function located in class `com.xerini.interview.A
 
 This will start the app and will serve the UI at http://localhost:7080/
 
-###Brief
+### Brief
 
 The current UI features a basic map based on the [OpenLayers](https://openlayers.org/) library.
 The back-end features two REST endpoints that are defined in `com.xerini.interview.server.api.GeoJsonService`

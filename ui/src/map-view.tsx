@@ -3,7 +3,7 @@ import {useEffect, useState} from "react"
 import {Feature, Map, MapBrowserEvent, View} from "ol";
 import {fromLonLat} from "ol/proj";
 import TileLayer from "ol/layer/Tile";
-import {Cluster, OSM, Vector} from "ol/source";
+import {OSM, Vector} from "ol/source";
 
 import "ol/ol.css";
 import {FeatureLike} from "ol/Feature";

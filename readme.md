@@ -35,3 +35,11 @@ The endpoint `POST /geo-json/add` is expected to receive coordinates for a singl
 The first task is to add implementations for these two endpoints so that new data points can be added and then returned to the front-end. An in-memory persistence solution is fine for the purposes of this exercise.
 
 The second task is to implement the function `onMapClick` in the file `ui/src/map-view.tsx` so that when the user clicks on the map, the location is stored in the rest API and the map data refreshed so that the updated point is displayed on the map.
+
+### Stretch tasks
+
+It's by no means mandatory but, if you have time, then one (or more) of the following tasks can be completed for extra marks:
+
+* Update the front-end map to support clustering of points, see [here](https://openlayers.org/en/latest/examples/cluster.html) for further documentation.
+* Change the persistence layer so that it writes and reads data from the file system.
+* Add additional controls to the UI and update the back-end so that additional metadata (such as point name) can be saved and retrieved.

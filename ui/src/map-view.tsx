@@ -77,12 +77,7 @@ export const MapView: React.FC = () => {
             features: features as Feature<any>[]
         });
 
-        const clusteredSource = new Cluster({
-            distance: 40,
-            source: source
-        });
-
-        newLayer.setSource(clusteredSource);
+        newLayer.setSource(source);
 
         return newLayer
     }

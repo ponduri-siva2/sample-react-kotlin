@@ -5,10 +5,10 @@
 This project provides a simple server-side component built in Kotlin and a front-end
 component built in React-JS/Typescript. 
 
-To build the whole project, including the front-end, execute the following gradle command:
+To build the whole project, including the front-end, execute the following gradle command from the project directory:
 
 ```
-$ gradlew clean build
+$ ./gradlew clean build
 ```
 
 To build just the front end, execute the following commands (note you'll need the latest version of node/npm from https://nodejs.org/en/)

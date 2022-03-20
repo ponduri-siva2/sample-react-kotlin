@@ -1,0 +1,85 @@
+/* Style the tab */
+
+  #submit, #close {
+    float: right;
+  }
+
+  .fields {
+    position: absolute;
+    left : 70px;
+  }
+  
+  .node-list {
+    overflow: hidden;
+    width: 100%;
+    padding: 0px;
+    margin: 20px auto;
+  }
+  
+  .node-list li {
+    list-style-type: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    width: 30%;
+    float: left;
+    position: relative;
+    text-align: center;
+    height: 71px;
+}
+  
+  .node-list li p {
+    color: #000;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-family: sans-serif;
+  }
+
+  .node-list li:after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    display: block;
+    font-size: 18px;
+    color: #000;
+    background: blue;
+    border: 2px solid blue;
+    margin: 0 auto 5px auto;
+    border-radius: 50%;
+    
+}
+
+.node-list li.active:after {
+  animation: blinker 1s ease infinite;
+  outline: 2px solid blue;
+}
+
+  .node-list li:before {
+    content: '';
+    width: 100%;
+    height: 4px;
+    background: blue;
+    position: absolute;
+    left: -50%;
+    bottom: 22px;
+    z-index: -1;
+}
+  
+  .node-list li:first-child:before {
+    content: none;
+  }
+
+  .errorText {
+    color: red;
+  }
+
+  button {
+    margin: 5px 2px 0px 2px;
+  }
+
+  @keyframes blinker {  
+    0% { outline-offset: 12px;}
+    50% { outline-offset: 5px; }
+    100% { outline-offset: 12px; }
+  }

@@ -3,19 +3,10 @@ import {useEffect, useState} from "react"
 require('./index-siva.css')
 
 function NavFields() {
-
-
   const [errors, setErrors] = useState<any>({});
   const [keyMapper, setKeyMapper] = useState<any>(null);
   const [tabIndex, setTabIndex] = useState(0);
-  const [data, setData] = useState<any>({
-    field1:'',
-    field2:'',
-    field3:'',
-    field4:'',
-    field5:'',
-    field6:''
-  });
+  const [data, setData] = useState<any>({});
 
   const fieldsList = () => {
     let fieldsObject: any = {};
@@ -58,12 +49,18 @@ function NavFields() {
   };
 
   useEffect(() => {
-    setKeyMapper(fieldsList());
+    loadFeatureData();
   }, []);
+
+  const loadFeatureData = () => {
+    fetch("api/formData")
+        .then(response => response.json())
+        .then(json => setData(json))
+        .then(() => setKeyMapper(fieldsList()));
+  }
 
 
   const moveTab = (val:number) => {
-    debugger;
     var value = tabIndex + val;
     if(value < 0 || value > 2) {
       return;
@@ -78,13 +75,25 @@ function NavFields() {
   }
 
   const saveData = () => {
-    //POST api call to save data
-    reset();
-    console.table(data);
-    alert('Data added');
+    fetch('api/formData/add', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      }).then(res => {
+        if(res.status === 200) {
+          alert("Data updated successfully.");
+          setTabIndex(0);
+          setErrors([]);
+        } else {
+          alert("Failed to updated.");
+        }
+      });
   }
 
-  const validate = () => {
+  const doValidate = () => {
     let currentErrors:any = {};
     const validEmail = new RegExp(
       '^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$'
@@ -93,7 +102,7 @@ function NavFields() {
    if(!validEmail.test(field1)) {
     currentErrors['Email'] = field1 + ' :Invalid Email';
    }
-   if(field2.trim().length === 0 || field2.match(/\d/g).length != 10 || isNaN(+field2)) {
+   if(isNaN(+field2) || field2.trim().length === 0 || field2.match(/\d/g).length != 10) {
     currentErrors['Phn'] = field2 + ' :Invalid phn number';
    }
    if(field3.trim().length > 20 || field3.trim().length === 0) {
@@ -111,7 +120,13 @@ function NavFields() {
    Object.keys(currentErrors).length > 0 ? setErrors(currentErrors) : saveData();
  };
 
- const reset = () => {
+ const doRefresh = () => {
+  loadFeatureData();
+  setTabIndex(0);
+  setErrors([]);
+ }
+
+ const doReset = () => {
   setData({field1:'',
   field2:'',
   field3:'',
@@ -122,7 +137,7 @@ function NavFields() {
   setErrors([]);
 };
 
-    return keyMapper && (
+  return keyMapper && (
     <div id="parent">
       <h1>Xerini-Interview</h1>
       <div>
@@ -159,8 +174,9 @@ function NavFields() {
         <div>
           <button id="prev" className="btn btn-primary" onClick={(e) =>  moveTab(-1)} disabled={tabIndex===0}>Prev</button>
           <button id="next" className="btn btn-primary" onClick={(e) =>  moveTab(1)} disabled={tabIndex===2}>Next</button>
-          <button id="submit" className="btn btn-success" onClick={validate}>Submit</button>
-          <button id="close" className="btn btn-danger" onClick={reset}>Close</button>
+          <button id="submit" className="btn btn-success" onClick={doValidate}>Submit</button>
+          <button id="close" className="btn btn-danger" onClick={doReset}>Close</button>
+          <button id="refresh" className="btn btn-secondary" onClick={doRefresh}>Refresh</button>
         </div>
     </div>
     );

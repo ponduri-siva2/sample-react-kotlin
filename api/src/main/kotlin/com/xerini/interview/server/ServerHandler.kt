@@ -1,6 +1,7 @@
 package com.xerini.interview.server
 
 import com.typesafe.config.Config
+import com.xerini.interview.server.api.FieldResource
 import com.xerini.interview.server.api.GeoJsonService
 import org.eclipse.jetty.server.Handler
 import org.eclipse.jetty.servlet.DefaultServlet
@@ -27,6 +28,7 @@ object ServerHandler {
         val resourceConfig = ResourceConfig()
         resourceConfig.register(GsonJerseyProvider::class.java)
         resourceConfig.register(GeoJsonService(), 0)
+        resourceConfig.register(FieldResource(), 1)
 
         handler.addServlet(ServletHolder(ServletContainer(resourceConfig)), path)
     }

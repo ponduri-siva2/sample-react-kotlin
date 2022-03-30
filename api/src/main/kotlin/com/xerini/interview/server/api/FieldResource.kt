@@ -1,7 +1,9 @@
 package com.xerini.interview.server.api
 
-import java.util.concurrent.CopyOnWriteArrayList
-import javax.ws.rs.*
+import javax.ws.rs.GET
+import javax.ws.rs.POST
+import javax.ws.rs.Path
+import javax.ws.rs.Produces
 import javax.ws.rs.core.MediaType.APPLICATION_JSON
 import javax.ws.rs.core.Response
 
@@ -10,14 +12,18 @@ import javax.ws.rs.core.Response
 class FieldResource {
     private var formData = mutableMapOf<String, String>()
 
+    init {
+        println("static block to initialize the data")
+        formData["field1"] = "";
+        formData["field2"] = "";
+        formData["field3"] = "";
+        formData["field4"] = "";
+        formData["field5"] = "";
+        formData["field6"] = "";
+    }
+
     @GET
     fun getGeoJson(): MutableMap<String, String> {
-        formData["field1"] = "siva@xerini.com";
-        formData["field2"] = "7464679584";
-        formData["field3"] = "West England";
-        formData["field4"] = "Xerini";
-        formData["field5"] = "Address1";
-        formData["field6"] = "BS32 0HN";
         return  formData;
     }
 
